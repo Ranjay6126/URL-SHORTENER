@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="/signup.css" />
+</head>
+<body>
+
+  <div class="signup-container">
+    <h1>Create Account</h1>
+
+    <form action="/user" method="post">
+      <div class="input-group">
+        <label>Full Name:</label>
+        <input type="text" placeholder="Enter your Name" name="name" required />
+      </div>
+
+      <div class="input-group">
+        <label>Email:</label>
+        <input type="email" placeholder="Enter your Email" name="email" required />
+      </div>
+
+      <div class="input-group">
+        <label>Password:</label>
+        <input type="password" placeholder="Enter your Password" name="password" required />
+      </div>
+
+      <button type="submit">Signup</button>
+    </form>
+
+    <p class="footer-text">Crafted with ❤️ by Ranjay</p>
+  </div>
+
+</body>
+</html>

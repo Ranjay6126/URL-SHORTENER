@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL_Shortener</title>
+
+    <!-- Cool & simple font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h1>🔗URL-SHORTENER✂️</h1>
+
+
+    <div>
+      <form method="POST" action="/url">
+        <label> Enter Your Original URL:-</label>
+        <input type="text" name="url" placeholder="https://example.com" />
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+
+     <% if (locals.id) { %>
+  <p class="generated-url">
+    <span><u> 🎉🥳Short-URL-Generated🥳🎉</u> </span><br />
+    <a href="http://localhost:3000/<%= id %>" target="_blank">
+      http://localhost:3000/<%= id %>
+    </a>
+  </p>
+<% } %>
+
+    <div>
+      <% if (locals.urls && urls.length > 0) { %>
+        <table border="1" cellpadding="8">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Short ID</th>
+              <th>Redirect URL</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% urls.forEach((url, index) => { %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= url.shortId %></td>
+                <td>
+                  <a href="<%= url.redirectURL %>" target="_blank">
+                    <%= url.redirectURL %>
+                  </a>
+                </td>
+                <td><%= url.visitHistory.length %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p> Crafted with ❤️ by Ranjay</p>
+      <% } %>
+    </div>
+  </body>
+</html>

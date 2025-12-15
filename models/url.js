@@ -9,11 +9,15 @@ const UrlSchema = new mongoose.Schema(
     },
     redirectURL: {
       type: String,
-      requried: true,
+      required: true,
     },
     visitHistory: [
       {
         timestamp: { type: Number },
+        createdBy:{
+          type : mongoose.Schema.Types.ObjectId,
+          ref: "users",
+        }
       },
     ],
   },

@@ -1,7 +1,7 @@
 const express = require('express');
+const URL = require('../models/url');
 
 const {GenerateNewShortURL, handleGetAnalytics} = require("../controllers/url");
-const { handleGetAllUsers } = require('../../MVC/controllers/user');
 
 const router = express.Router();
 

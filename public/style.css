@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f4f6fb;
+  padding: 30px 20px;
+  color: #333;
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #58da7a;
+  font-size: 30px;
+  font-family: underline;
+   text-decoration: underline;
+}
+
+/* Generated URL */
+p {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #0c0c0c;
+}
+
+p a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Form */
+form {
+  max-width: 650px;
+  margin: 0 auto 30px auto;
+  display: flex;
+  gap: 10px;
+}
+
+label {
+  font-weight: 600;
+  color: #0c0c0c;
+  align-self: center;
+}
+
+input {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #6eca64;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #4133da;
+}
+
+/* Table */
+table {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+thead {
+  background: #3730c0;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background: #f3f4ff;
+}
+
+tbody tr:hover {
+  background: #eef0ff;
+}
+
+td a {
+  color: #4f46e5;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Empty text */
+div > p {
+  text-align: center;
+  color: #777;
+  margin-top: 15px;
+}
+
+
+/* css for the url generated */
+
+.generated-url {
+  margin: 15px auto;
+  text-align: center;
+  font-size: 15px;
+}
+
+.generated-url span {
+  font-weight: 500;
+  color: #101010;
+}
+
+.generated-url a {
+  color: #0077cc;
+  text-decoration: underline;
+}
+
+.generated-url a:hover {
+  color: #005999;
+}
+
+
+.footer-text {
+  position: fixed;   
+  bottom: 0;         
+  left: 0;         
+  width: 100%;       
+  text-align: center; 
+  padding: 10px 0;   
+  background-color: #f8f8f8; 
+}
+
