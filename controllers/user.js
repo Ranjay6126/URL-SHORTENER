@@ -35,9 +35,10 @@ async function handleUserlogin(req, res) {
             })
          
             //creating sessionId if all things is correct...
-            const sessionId  = uuidv4();
-            setUser(sessionId, user);
-            res.cookie("uid", sessionId);
+            // const sessionId  = uuidv4();
+            const token = setUser(user);
+            res.cookie("uid", token);
+             res.redirect("/");
 
 
         // Fetch URLs to display in the table
