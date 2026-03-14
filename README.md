@@ -1,4 +1,4 @@
-﻿# URL-SHORTENER
+
 # URL Shortener (MERN Stack)
 
 A full-stack URL Shortener built with the MERN stack following the MVC architecture. Users can register and log in using JWT authentication, create and manage short links, and track basic usage. The backend uses Node.js, Express, MongoDB, and JWT, while the frontend is built with React for a fast, responsive UI.
