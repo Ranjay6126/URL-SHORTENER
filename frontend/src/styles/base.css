@@ -1,0 +1,185 @@
+/* ====== SnapURL — base styles (original LIGHT theme restored) ====== */
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --primary-2: #6366f1;
+  --green: #10b981;
+  --red: #ef4444;
+  --bg: #f5f6ff;
+  --card: #ffffff;
+  --card-2: #eef2ff;
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --shadow: 0 10px 30px rgba(79, 70, 229, 0.08);
+  --radius: 14px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#root, body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main.container {
+  width: min(1060px, 92%);
+  margin: 0 auto;
+  padding: 28px 0 60px;
+  flex: 1;
+}
+
+a { color: var(--primary); text-decoration: none; }
+.muted { color: var(--muted); font-size: 13px; }
+.small-note { font-size: 13px; margin-bottom: 14px; }
+.back-home { margin-top: 18px; font-size: 14px; }
+
+.boot-loading {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* ---------------- navbar ---------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+}
+
+.brand { font-weight: 800; font-size: 20px; color: var(--text); }
+
+.nav-right { display: flex; align-items: center; gap: 14px; }
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #eef2ff;
+  border: 1px solid #e0e7ff;
+  border-radius: 999px;
+  padding: 5px 12px 5px 5px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.user-email {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout, .btn-logs {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--danger, var(--red));
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 16px;
+  transition: all 0.15s ease;
+}
+
+.btn-logout:hover, .btn-logs:hover { border-color: var(--red); }
+.btn-logs { color: var(--primary); }
+
+/* ---------------- hero + form ---------------- */
+.hero { text-align: center; margin-bottom: 30px; }
+
+.hero h1 {
+  font-size: clamp(28px, 4.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.grad {
+  background: linear-gradient(90deg, var(--primary), var(--green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-sub { color: var(--muted); margin: 10px 0 22px; font-size: 15px; }
+
+.shorten-form {
+  display: flex;
+  gap: 10px;
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 8px;
+  border-radius: 999px;
+}
+
+.shorten-form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  padding: 10px 16px;
+}
+
+.shorten-form button {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  border-radius: 999px;
+  padding: 12px 26px;
+  transition: filter 0.15s ease;
+}
+
+.shorten-form button:hover:not(:disabled) { filter: brightness(1.08); }
+.shorten-form button:disabled { opacity: 0.6; cursor: wait; }
+
+/* ---------------- alert ---------------- */
+.alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--red);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-top: 12px;
+}
