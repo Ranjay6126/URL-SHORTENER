@@ -40,10 +40,31 @@ connectToMongoDB(process.env.MONGO_URI)
     console.error("MongoDB connection failed:", err);
   });
 
-// allow the React frontend (different port) to call this API with cookies
+// allow the React frontend to call this API with cookies.
+// Works even if CLIENT_URL is not configured on the host:
+// - explicit CLIENT_URL env var
+// - this project's deployed frontend
+// - any *.onrender.com preview/service (Render)
+// - local Vite dev server
+const ALLOWED_ORIGINS = [
+  CLIENT_URL,
+  "https://url-shortener-eaoi.onrender.com",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+];
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: (origin, callback) => {
+      // requests without an Origin (curl, mobile apps, same-origin) are OK
+      if (!origin) return callback(null, true);
+      if (
+        ALLOWED_ORIGINS.includes(origin) ||
+        /\.onrender\.com$/.test(new URL(origin).hostname)
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, false); // unknown origins: no CORS headers sent
+    },
     credentials: true,
   })
 );
