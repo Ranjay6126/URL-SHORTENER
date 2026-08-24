@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
 
 const { connectToMongoDB } = require("./connect");
 const { restrictToLoggedInUserOnly } = require("./middlewares/auth");
@@ -17,6 +19,17 @@ const logRoute = require("./routes/logs");
 const app = express();
 const PORT = process.env.PORT || 8000;
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+
+// single-service deployment: if the React app is built into frontend/dist,
+// this server also serves the UI -> one URL for everything, no CORS needed.
+const FRONTEND_DIST =
+  process.env.FRONTEND_DIST || path.join(__dirname, "..", "frontend", "dist");
+let hasFrontendBuild = false;
+try {
+  hasFrontendBuild = fs.existsSync(path.join(FRONTEND_DIST, "index.html"));
+} catch {
+  /* ignore */
+}
 
 // MongoDB Atlas connection string comes from .env
 connectToMongoDB(process.env.MONGO_URI)
@@ -55,6 +68,17 @@ app.use("/api/logs", logRoute); // server logs (admin only)
 app.use("/api", (req, res) => {
   return res.status(404).json({ error: "API route not found" });
 });
+
+// ---------- single-service mode: serve the React build ----------
+// static assets first, then the known SPA routes so they are NOT treated
+// as short ids by the /:shortId redirect below.
+if (hasFrontendBuild) {
+  app.use(express.static(FRONTEND_DIST));
+  app.get(["/", "/index.html", "/login", "/signup", "/logs"], (req, res) => {
+    return res.sendFile(path.join(FRONTEND_DIST, "index.html"));
+  });
+  console.log(`Serving frontend build from ${FRONTEND_DIST}`);
+}
 
 // ---------- short link redirect (works from any origin) ----------
 app.get("/:shortId", async (req, res, next) => {
