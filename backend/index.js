@@ -132,6 +132,14 @@ app.use((err, req, res, next) => {
   return res.status(500).json({ error: "Something went wrong" });
 });
 
-app.listen(PORT, () => {
+if(process.env.NODE_ENV != "production"){
+
+  app.listen(PORT, () => {
   console.log(`Backend API listening on http://localhost:${PORT}`);
 });
+
+}  
+
+//export the server for the vercel
+
+export default server;
