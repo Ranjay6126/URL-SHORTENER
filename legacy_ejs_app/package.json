@@ -1,0 +1,28 @@
+{
+  "name": "url_shortener",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@babel/standalone": "^8.0.4",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.1",
+    "nodemon": "^3.1.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "shortid": "^2.2.17",
+    "uuid": "^13.0.0"
+  }
+}

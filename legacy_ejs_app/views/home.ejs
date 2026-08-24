@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>" />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%
+      /* data passed from Express -> injected safely for React */
+      const pageData = JSON.stringify({
+        urls: locals.urls || [],
+        newId: locals.id || null,
+      }).replace(/</g, "\\u003c");
+    %>
+
+    <!-- ================= NAVBAR (server rendered by EJS) ================= -->
+    <nav class="navbar">
+      <a class="brand" href="/">✂️URL Shortener 🔗</a>
+
+      <div class="nav-right">
+        <% if (locals.user) { %>
+          <div class="user-chip" title="<%= user.email %>">
+            <div class="avatar"><%= String(user.email || 'U')[0].toUpperCase() %></div>
+            <span class="user-email"><%= user.email %></span>
+          </div>
+          <% if (locals.user && locals.isAdmin) { %>
+            <a href="/logs" class="btn-logout" style="color: var(--primary); border-color: #e0e7ff;">📜 Logs</a>
+          <% } %>
+          <a href="/logout" class="btn-logout">Logout</a>
+        <% } %>
+      </div>
+    </nav>
+
+    <main class="container">
+      <!-- ============ HERO (plain HTML form, works without JS) ============ -->
+      <header class="hero">
+        <h1>Shorten your <span class="grad">long links</span> ✂️</h1>
+        <p class="hero-sub">Paste any long URL below, get a clean short link — click tracking included.</p>
+
+        <form class="shorten-form" method="POST" action="/url" autocomplete="off">
+          <input type="text" name="url" placeholder="https://example.com/my-really-long-url" required />
+          <button type="submit">Shorten ⚡</button>
+        </form>
+      </header>
+
+      <!-- ====== REACT APP: banner + stats + table + analytics panel ====== -->
+      <div id="root"></div>
+    </main>
+
+    <footer class="footer">
+      Crafted with ❤️ by Ranjay
+    </footer>
+
+    <!-- ====== page data for React (JSON island, XSS-safe) ====== -->
+    <script id="__DATA__" type="application/json"><%- pageData %></script>
+
+    <!-- React 18 UMD + Babel (served locally from node_modules) -->
+    <script crossorigin src="/vendor/react/react.production.min.js"></script>
+    <script crossorigin src="/vendor/react-dom/react-dom.production.min.js"></script>
+    <script src="/vendor/babel/babel.min.js"></script>
+    <script type="text/babel" src="/react/HomeApp.jsx"></script>
+  </body>
+</html>

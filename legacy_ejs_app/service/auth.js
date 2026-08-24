@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const secret = "ranjay8848"; // should be in env variable
+// keep the secret in an environment variable (.env)
+const secret = process.env.JWT_SECRET || "ranjay8848";
 
 
 //this will create the token..

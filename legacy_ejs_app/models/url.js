@@ -11,6 +11,11 @@ const UrlSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // who created this short link (logged in user)
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
     visitHistory: [
       {
         timestamp: { type: Number },

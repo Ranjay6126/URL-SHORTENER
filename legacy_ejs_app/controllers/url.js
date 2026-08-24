@@ -1,6 +1,7 @@
 const shortid = require("shortid");
 
 const URL = require("../models/url");
+const { isAdminEmail } = require("../middlewares/admin");
 
 async function GenerateNewShortURL(req, res) {
   const body = req.body;
@@ -15,11 +16,16 @@ async function GenerateNewShortURL(req, res) {
     createdBy: req.user._id,
   });
 
-  //this is for the json response
-  // return res.json({ id: shortId });
+  // re-fetch only this user's links so the table stays up to date
+  const urls = await URL.find({ createdBy: req.user._id }).sort({
+    createdAt: -1,
+  });
 
   return res.render('home', {
     id : shortId,
+    urls,
+    user: req.user,
+    isAdmin: isAdminEmail(req.user.email),
   })
 }
 

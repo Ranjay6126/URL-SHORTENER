@@ -1,9 +1,11 @@
 const express = require("express");
 const path = require("path");
 const cookieParser = require('cookie-parser')
+require("dotenv").config();
 
 const { connectToMongoDB } = require("./connect");
 const { restrictToLoggedInUserOnly } = require("./middlewares/auth");
+const { requestLogger } = require("./middlewares/logger");
 
  
 const URL = require("./models/url");
@@ -15,11 +17,12 @@ const staticRoute = require("./routes/staticRouter");
 const UserRoute = require("./routes/user");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-connectToMongoDB("mongodb://127.0.0.1:27017/urlshortner")
+// MongoDB Atlas connection string comes from .env
+connectToMongoDB(process.env.MONGO_URI)
   .then(() => {
-    console.log("MongoDB is connected");
+    console.log("MongoDB (Atlas) is connected");
   })
   .catch((err) => {
     console.error("MongoDB connection failed:", err);
@@ -36,9 +39,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
+// log every request: IP | time | method | URL -> server_logs.txt
+app.use(requestLogger);
+
 
 
 app.use(express.static(path.join(__dirname, "public")));
+
+// React 18 UMD builds + Babel compiler served locally from node_modules
+app.use("/vendor/react", express.static(path.join(__dirname, "node_modules/react/umd")));
+app.use("/vendor/react-dom", express.static(path.join(__dirname, "node_modules/react-dom/umd")));
+app.use("/vendor/babel", express.static(path.join(__dirname, "node_modules/@babel/standalone")));
 
 //rendring the home page
 // app.get('/test', async (req, res) => {

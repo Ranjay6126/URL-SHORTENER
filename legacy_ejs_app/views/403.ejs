@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Access Denied</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", "Segoe UI", sans-serif; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #eef2ff, #fce7f3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      max-width: 430px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 42px 34px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(79, 70, 229, 0.15);
+      animation: rise 0.4s ease;
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .lock { font-size: 46px; margin-bottom: 12px; }
+    h1 { font-size: 24px; font-weight: 800; color: #111827; margin-bottom: 8px; }
+    p { color: #6b7280; font-size: 14px; line-height: 1.55; margin-bottom: 6px; }
+    .who { color: #111827; font-weight: 600; word-break: break-all; }
+    a.btn {
+      display: inline-block;
+      margin-top: 18px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14.5px;
+      border-radius: 12px;
+      padding: 12px 26px;
+      transition: 0.25s;
+    }
+    a.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(79, 70, 229, 0.35); }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="lock">🔒</div>
+    <h1>403 — Access Denied</h1>
+    <p>This area contains sensitive server logs and is restricted to the owner of this application.</p>
+    <p>Signed in as <span class="who"><%= typeof email !== 'undefined' ? email : 'guest' %></span></p>
+    <a class="btn" href="/">← Back to Home</a>
+  </main>
+</body>
+</html>
