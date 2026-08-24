@@ -4,6 +4,14 @@ const User = require("../models/user");
 const { setUser } = require("../service/auth");
 const { isAdminEmail } = require("../middlewares/admin");
 
+// cross-site cookies: when the frontend and backend run on different
+// domains (e.g. two Render services), browsers only send cookies marked
+// SameSite=None + Secure. Locally (same machine, http) keep defaults.
+const COOKIE_OPTIONS =
+  process.env.NODE_ENV === "production"
+    ? { httpOnly: true, sameSite: "none", secure: true }
+    : {};
+
 //signup -> password is hashed with bcrypt before storing in MongoDB
 async function handleUserSingup(req, res) {
   try {
@@ -31,7 +39,7 @@ async function handleUserSingup(req, res) {
 
     // log the user in right after signup
     const token = setUser(user);
-    res.cookie("uid", token);
+    res.cookie("uid", token, COOKIE_OPTIONS);
 
     return res.status(201).json({
       ok: true,
@@ -65,7 +73,7 @@ async function handleUserlogin(req, res) {
     }
 
     const token = setUser(user);
-    res.cookie("uid", token);
+    res.cookie("uid", token, COOKIE_OPTIONS);
 
     return res.json({
       ok: true,
@@ -79,7 +87,7 @@ async function handleUserlogin(req, res) {
 
 //logout -> clear the jwt cookie
 function handleUserLogout(req, res) {
-  res.clearCookie("uid");
+  res.clearCookie("uid", COOKIE_OPTIONS);
   return res.json({ ok: true });
 }
 
