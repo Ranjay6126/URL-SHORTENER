@@ -1,0 +1,21 @@
+# Render Blueprint — deploys SnapURL as ONE Web Service that serves the
+# React UI (frontend/dist), the JSON API (/api/*) and the short-link
+# redirects (/:shortId) from a single URL.
+#
+# Usage: Render Dashboard -> New + -> Blueprint -> pick this repo,
+# paste your Atlas connection string for MONGO_URI when prompted -> Deploy.
+services:
+  - type: web
+    name: snapurl
+    runtime: node
+    plan: free
+    buildCommand: npm run install-all && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: MONGO_URI
+        sync: false # you will be asked to paste the Atlas connection string
+      - key: JWT_SECRET
+        generateValue: true # strong random secret, stored by Render
+      - key: ADMIN_EMAIL
+        value: panditranjay33@gmail.com

@@ -4,7 +4,8 @@
   "description": "SnapURL backend — Express 5 + MongoDB JSON API",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "license": "ISC",
   "dependencies": {

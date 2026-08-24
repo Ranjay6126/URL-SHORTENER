@@ -56,7 +56,8 @@ URL_shortener/
 
    ```
    cd backend
-   npm start        # nodemon on http://localhost:8000
+   npm start        # node index.js on http://localhost:8000
+   # or: npm run dev  (nodemon auto-restart)
    ```
 
 4. In a second terminal, start the **frontend**:
@@ -71,6 +72,47 @@ URL_shortener/
 
 > Tip: from the project root you can also run `npm start` (backend) and
 > `npm run dev` (frontend) without cd-ing into the folders.
+
+## Deploy on Render (one URL for everything)
+
+The Express server automatically serves the built React app from
+`frontend/dist`, so a single Render **Web Service** hosts the UI, the JSON
+API and the `/:shortId` redirects together — no CORS, no cross-site cookies.
+
+A `render.yaml` blueprint is included, so the fastest path is:
+
+1. Push this repo to GitHub.
+2. On [dashboard.render.com](https://dashboard.render.com): **New + → Blueprint** → pick this repo.
+3. Paste your MongoDB Atlas connection string when prompted for `MONGO_URI`.
+   (In Atlas → Network Access, allow `0.0.0.0/0` so Render's servers can connect.)
+4. Click **Deploy**. One URL serves everything.
+
+<details>
+<summary>Manual setup (without the blueprint)</summary>
+
+| Setting       | Value                                  |
+| ------------- | -------------------------------------- |
+| Type          | **Web Service** (Node)                 |
+| Build Command | `npm run install-all && npm run build` |
+| Start Command | `npm start`                            |
+
+Environment variables (the `.env` files are git-ignored, so these MUST be set
+in the Render dashboard):
+
+- `MONGO_URI` — MongoDB Atlas connection string
+- `JWT_SECRET` — any long random string (or let Render generate one)
+- `ADMIN_EMAIL` — email that unlocks the `/logs` page
+</details>
+
+Important notes:
+
+- **Do not** create a *Static Site* for the frontend — a static site cannot
+  serve the API or follow redirects, which breaks the app.
+- **Do not** set `NODE_ENV=production` as an env var: the build step needs the
+  frontend dev-dependencies (Vite). Render injects `RENDER=true` on its own,
+  which already switches cookies/CORS into production mode.
+- If you previously deployed the two-service split (static frontend +
+  separate backend), you can delete both after the new single service works.
 
 ## Features
 
