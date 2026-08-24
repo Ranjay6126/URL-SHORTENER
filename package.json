@@ -9,8 +9,5 @@
     "build": "npm --prefix frontend run build",
     "install-all": "npm --prefix backend install && npm --prefix frontend install"
   },
-  "engines": {
-    "node": ">=20"
-  },
   "license": "ISC"
 }
