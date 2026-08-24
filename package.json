@@ -1,23 +1,13 @@
 {
   "name": "url_shortener",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "description": "SnapURL — MERN URL shortener (frontend/ + backend/)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "dev": "npm --prefix frontend run dev",
+    "start": "npm --prefix backend start",
+    "build": "npm --prefix frontend run build",
+    "install-all": "npm --prefix backend install && npm --prefix frontend install"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "cookie-parser": "^1.4.7",
-    "ejs": "^3.1.10",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.0.1",
-    "nodemon": "^3.1.11",
-    "shortid": "^2.2.17",
-    "uuid": "^13.0.0"
-  }
+  "license": "ISC"
 }
