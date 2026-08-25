@@ -2,7 +2,7 @@ import { SHORT_LINK_BASE, formatDate } from "../api.js";
 import { CopyButton } from "../components.jsx";
 
 /* ---------------- Links table ---------------- */
-export function LinksTable({ urls, onAnalytics }) {
+export function LinksTable({ urls, onAnalytics, onDelete }) {
   return (
     <section className="table-card">
       <div className="table-head-row">
@@ -59,13 +59,25 @@ export function LinksTable({ urls, onAnalytics }) {
                 </td>
                 <td className="muted">{formatDate(url.createdAt)}</td>
                 <td>
-                  <button
-                    className="btn-analytics"
-                    type="button"
-                    onClick={() => onAnalytics(url.shortId)}
-                  >
-                    📊 Analytics
-                  </button>
+                  <div className="action-cell">
+                    <button
+                      className="btn-analytics"
+                      type="button"
+                      onClick={() => onAnalytics(url.shortId)}
+                    >
+                      📊 Analytics
+                    </button>
+                    {onDelete && (
+                      <button
+                        className="btn-delete-row"
+                        type="button"
+                        title={`Delete /${url.shortId}`}
+                        onClick={() => onDelete(url.shortId)}
+                      >
+                        🗑 Delete
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}

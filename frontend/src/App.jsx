@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Routes, Route } from "react-router-dom";
 import { api } from "./api.js";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Logs from "./pages/Logs.jsx";
+import AnalyticsPage from "./pages/AnalyticsPage.jsx";
 
 export default function App() {
   const [user, setUser] = useState(null); // {_id,name,email,isAdmin}
@@ -65,6 +66,17 @@ export default function App() {
             <Logs user={user} onLogout={handleLogout} />
           ) : (
             <Navigate to="/" replace />
+          )
+        }
+      />
+      {/* full-page analytics — opens when a user clicks 📊 Analytics */}
+      <Route
+        path="/analytics/:shortId"
+        element={
+          user ? (
+            <AnalyticsPage user={user} onLogout={handleLogout} />
+          ) : (
+            <Navigate to="/login" replace />
           )
         }
       />

@@ -7,7 +7,8 @@ const fs = require("fs");
 
 const { connectToMongoDB } = require("./connect");
 const { restrictToLoggedInUserOnly } = require("./middlewares/auth");
-const { requestLogger } = require("./middlewares/logger");
+const { requestLogger, getClientIp, getDeviceId } = require("./middlewares/logger");
+const { resolveDisplayIp, ensurePublicIpCached } = require("./service/ip");
 
 const URL = require("./models/url");
 
@@ -40,15 +41,15 @@ connectToMongoDB(process.env.MONGO_URI)
     console.error("MongoDB connection failed:", err);
   });
 
-// allow the React frontend to call this API with cookies.
-// Works even if CLIENT_URL is not configured on the host:
+// resolve the machine's public IP at boot so the admin sees a proper
+// IP address (not 127.0.0.1) even while running on localhost
+ensurePublicIpCached(true);
+
+// allow the React frontend to call this API with cookies:
 // - explicit CLIENT_URL env var
-// - this project's deployed frontend
-// - any *.onrender.com preview/service (Render)
 // - local Vite dev server
 const ALLOWED_ORIGINS = [
   CLIENT_URL,
-  "https://url-shortener-eaoi.onrender.com",
   "http://localhost:5173",
   "http://127.0.0.1:5173",
 ];
@@ -57,10 +58,7 @@ app.use(
     origin: (origin, callback) => {
       // requests without an Origin (curl, mobile apps, same-origin) are OK
       if (!origin) return callback(null, true);
-      if (
-        ALLOWED_ORIGINS.includes(origin) ||
-        /\.onrender\.com$/.test(new URL(origin).hostname)
-      ) {
+      if (ALLOWED_ORIGINS.includes(origin)) {
         return callback(null, true);
       }
       return callback(null, false); // unknown origins: no CORS headers sent
@@ -95,9 +93,12 @@ app.use("/api", (req, res) => {
 // as short ids by the /:shortId redirect below.
 if (hasFrontendBuild) {
   app.use(express.static(FRONTEND_DIST));
-  app.get(["/", "/index.html", "/login", "/signup", "/logs"], (req, res) => {
-    return res.sendFile(path.join(FRONTEND_DIST, "index.html"));
-  });
+  app.get(
+    ["/", "/index.html", "/login", "/signup", "/logs", "/analytics/:shortId"],
+    (req, res) => {
+      return res.sendFile(path.join(FRONTEND_DIST, "index.html"));
+    }
+  );
   console.log(`Serving frontend build from ${FRONTEND_DIST}`);
 }
 
@@ -110,7 +111,13 @@ app.get("/:shortId", async (req, res, next) => {
       { shortId },
       {
         $push: {
-          visitHistory: { timestamp: Date.now() },
+          visitHistory: {
+            timestamp: Date.now(),
+            // record who clicked, from where — real public IP when local
+            ip: await resolveDisplayIp(getClientIp(req)),
+            // MAC-style device id of the visitor's browser
+            mac: getDeviceId(req),
+          },
         },
       },
       { new: true }
@@ -132,14 +139,7 @@ app.use((err, req, res, next) => {
   return res.status(500).json({ error: "Something went wrong" });
 });
 
-if(process.env.NODE_ENV != "production"){
-
-  app.listen(PORT, () => {
+// start the server
+app.listen(PORT, () => {
   console.log(`Backend API listening on http://localhost:${PORT}`);
 });
-
-}  
-
-//export the server for the vercel
-
-export default server;

@@ -13,6 +13,35 @@ export const API_BASE = (
 export const SHORT_LINK_BASE =
   API_BASE || `${window.location.protocol}//${window.location.host}`;
 
+/* ---------------- device id (MAC-style) ----------------
+   Browsers never expose the visitor's physical network-card MAC address,
+   so we generate a persistent, MAC-formatted device id instead and keep it
+   in localStorage + a cookie. The cookie (cookies ignore ports) travels to
+   the API origin even when someone opens a bare short link, so every click
+   can be tied to one "device" and stored next to the IP address. */
+export function ensureDeviceId() {
+  try {
+    let id = window.localStorage.getItem("snapurl_device_id");
+    if (!id || !/^([0-9A-F]{2}:){5}[0-9A-F]{2}$/.test(id)) {
+      const hex = () =>
+        Math.floor(Math.random() * 256)
+          .toString(16)
+          .padStart(2, "0")
+          .toUpperCase();
+      // starts with 02 -> "locally administered" MAC, e.g. 02:4F:1A:9C:33:B7
+      id = ["02", ...Array.from({ length: 5 }, hex)].join(":");
+      window.localStorage.setItem("snapurl_device_id", id);
+    }
+    document.cookie = `deviceId=${encodeURIComponent(
+      id
+    )}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`;
+    return id;
+  } catch {
+    return "";
+  }
+}
+ensureDeviceId();
+
 export async function api(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
     credentials: "include",

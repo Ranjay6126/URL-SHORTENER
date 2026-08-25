@@ -4,13 +4,9 @@ const User = require("../models/user");
 const { setUser } = require("../service/auth");
 const { isAdminEmail } = require("../middlewares/admin");
 
-// cross-site cookies: when the frontend and backend run on different
-// domains (e.g. two Render services), browsers only send cookies marked
-// SameSite=None + Secure. Locally (same machine, http) keep defaults.
-// Render.com injects RENDER=true into its services, so production is
-// detected automatically there.
-const IS_PRODUCTION =
-  process.env.NODE_ENV === "production" || process.env.RENDER === "true";
+// cookie options: in production (NODE_ENV=production) use secure cookies;
+// locally (http, same machine) keep defaults.
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 const COOKIE_OPTIONS = IS_PRODUCTION
   ? { httpOnly: true, sameSite: "none", secure: true }
   : {};
