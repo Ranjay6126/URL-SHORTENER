@@ -23,9 +23,9 @@ function ActionsBar() {
 
   return (
     <div className="actions">
-      <a className="btn btn-ghost" href="/logs">🔄 Refresh</a>
-      <a className="btn btn-primary" href="/download" download>📥 Download Logs</a>
-      <button className="btn btn-danger" type="button" onClick={clear}>🗑 Clear</button>
+      <a className="btn btn-ghost" href="/logs">Refresh</a>
+      <a className="btn btn-primary" href="/download" download>Download Logs</a>
+      <button className="btn btn-danger" type="button" onClick={clear}>Clear</button>
     </div>
   );
 }
@@ -42,9 +42,9 @@ function StatsGrid({ lines }) {
   const todays = lines.filter((l) => l.includes(today)).length;
 
   const cards = [
-    ["📋", lines.length, "Logged Requests"],
-    ["🌐", uniqIps, "Unique IPs"],
-    ["📅", todays, "Requests Today"],
+    ["", lines.length, "Logged Requests"],
+    ["", uniqIps, "Unique IPs"],
+    ["", todays, "Requests Today"],
   ];
 
   return (
@@ -88,7 +88,6 @@ function LogList({ lines }) {
 function EmptyState() {
   return (
     <section className="empty-state">
-      <div className="empty-emoji">📭</div>
       <h3>No logs yet</h3>
       <p>Browse the site and requests will start appearing here instantly.</p>
     </section>

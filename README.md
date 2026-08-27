@@ -76,26 +76,26 @@ URL_shortener/
 
 ## What a normal user can do
 
-- ✍️ **Create an account & sign in** — friendly signup/login pages, the session
+- **Create an account & sign in** — friendly signup/login pages, the session
   is kept in an httpOnly JWT cookie, and logout is one click away
   (`GET /api/user/logout`)
-- ✂️ **Shorten any long URL** — paste a link into the box on the home page and
+- **Shorten any long URL** — paste a link into the box on the home page and
   get a clean short link instantly (`POST /api/url`)
-- 📋 **One-click copy** — every short link has a 📋 Copy button right next to it
-- 🔁 **Share & track clicks** — anyone who opens your short link (`/:shortId`)
+- **One-click copy** — every short link has a Copy button right next to it
+- **Share & track clicks** — anyone who opens your short link (`/:shortId`)
   is redirected to the destination while the click is recorded with a timestamp
-- 👤 **Your links, only yours** — the "Your Links" table lists just the links YOU
+- **Your links, only yours** — the "Your Links" table lists just the links YOU
   created, each with its click count and creation date; you can never see or
   touch another user's links
-- 📊 **Full-page analytics per link** — clicking 📊 Analytics opens a dedicated
+- **Full-page analytics per link** — clicking Analytics opens a dedicated
   page with **Total Clicks**, the short link itself, and the complete
   **Visit History** (the time of every single click), plus an easy
-  **← Back to my links** button
-- 📈 **Stats at a glance** — home-page cards show your total links, total clicks
+  **Back to my links** button
+- **Stats at a glance** — home-page cards show your total links, total clicks
   and average clicks per link
-- 🔒 **Secure by default** — passwords are hashed with bcrypt and every data
+- **Secure by default** — passwords are hashed with bcrypt and every data
   request is scoped strictly to your account
 
 
 
-Crafted with ❤️ by Ranjay
+Crafted with care by Ranjay

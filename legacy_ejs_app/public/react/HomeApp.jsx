@@ -43,15 +43,15 @@ function AnalyticsPanel({ shortId, onClose }) {
     <section className="analytics-panel">
       <div className="analytics-head">
         <h3>
-          📊 Analytics — <span id="analyticsShortId">{shortId}</span>
+          Analytics — <span id="analyticsShortId">{shortId}</span>
         </h3>
-        <button className="btn-close-panel" type="button" onClick={onClose} title="Close">✕</button>
+        <button className="btn-close-panel" type="button" onClick={onClose} title="Close">X</button>
       </div>
 
-      {loading && <div className="loading">⏳ Loading analytics…</div>}
+      {loading && <div className="loading">Loading analytics...</div>}
 
       {error && (
-        <div className="load-error">⚠️ Could not load analytics. Please try again.</div>
+        <div className="load-error">Could not load analytics. Please try again.</div>
       )}
 
       {!loading && !error && data && (
@@ -69,7 +69,7 @@ function AnalyticsPanel({ shortId, onClose }) {
                 {recent.map((v, i) => (
                   <li key={v._id || i}>
                     <span className="visit-idx">#{visits.length - i}</span>
-                    <span className="visit-time">🕒 {formatTime(v.timestamp)}</span>
+                    <span className="visit-time">{formatTime(v.timestamp)}</span>
                   </li>
                 ))}
               </ul>
@@ -80,7 +80,7 @@ function AnalyticsPanel({ shortId, onClose }) {
               )}
             </>
           ) : (
-            <div className="loading">🙈 No clicks yet — share your link!</div>
+            <div className="loading">No clicks yet - share your link!</div>
           )}
         </div>
       )}
@@ -134,7 +134,7 @@ function LinksTable({ urls, onAnalytics }) {
                 <td className="muted">{formatDate(url.createdAt)}</td>
                 <td>
                   <button className="btn-analytics" type="button" onClick={() => onAnalytics(url.shortId)}>
-                    📊 Analytics
+                    Analytics
                   </button>
                 </td>
               </tr>
@@ -151,9 +151,8 @@ function EmptyState() {
   return (
     <section className="table-card">
       <div className="empty-state">
-        <div className="empty-emoji">🚀</div>
         <h3>No links yet</h3>
-        <p>Shorten your first URL using the box above — it will show up here.</p>
+        <p>Shorten your first URL using the box above - it will show up here.</p>
       </div>
     </section>
   );

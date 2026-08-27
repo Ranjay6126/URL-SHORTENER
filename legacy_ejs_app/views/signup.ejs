@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Signup</title>
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%234f46e5%22/><text x=%2250%22 y=%2265%22 text-anchor=%22middle%22 font-size=%2250%22 font-family=%22sans-serif%22 fill=%22white%22 font-weight=%22bold%22>S</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
@@ -13,12 +13,12 @@
 </head>
 <body>
   <main class="auth-card">
-    <div class="auth-logo">✂️</div>
+    <div class="auth-logo"></div>
     <h1>Create account</h1>
     <p class="auth-sub">Start shortening links in seconds</p>
 
     <% if (locals.error) { %>
-      <div class="alert-error">⚠️ <%= error %></div>
+      <div class="alert-error"><%= error %></div>
     <% } %>
 
     <form action="/user" method="post">
@@ -37,12 +37,12 @@
         <input id="password" type="password" placeholder="Create a password" name="password" required minlength="4" />
       </div>
 
-      <button type="submit">Sign Up ⚡</button>
+      <button type="submit">Sign Up</button>
     </form>
 
     <p class="switch-auth">Already have an account? <a href="/login">Login</a></p>
   </main>
 
-  <p class="footer-text">Passwords are securely hashed 🔒</p>
+  <p class="footer-text">Passwords are securely hashed</p>
 </body>
 </html>

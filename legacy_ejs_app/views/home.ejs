@@ -6,7 +6,7 @@
     <title>URL Shortener</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%234f46e5%22/><text x=%2250%22 y=%2265%22 text-anchor=%22middle%22 font-size=%2250%22 font-family=%22sans-serif%22 fill=%22white%22 font-weight=%22bold%22>S</text></svg>" />
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,7 @@
 
     <!-- ================= NAVBAR (server rendered by EJS) ================= -->
     <nav class="navbar">
-      <a class="brand" href="/">✂️URL Shortener 🔗</a>
+      <a class="brand" href="/">URL Shortener</a>
 
       <div class="nav-right">
         <% if (locals.user) { %>
@@ -35,7 +35,7 @@
             <span class="user-email"><%= user.email %></span>
           </div>
           <% if (locals.user && locals.isAdmin) { %>
-            <a href="/logs" class="btn-logout" style="color: var(--primary); border-color: #e0e7ff;">📜 Logs</a>
+            <a href="/logs" class="btn-logout" style="color: var(--primary); border-color: #e0e7ff;">Logs</a>
           <% } %>
           <a href="/logout" class="btn-logout">Logout</a>
         <% } %>
@@ -45,12 +45,12 @@
     <main class="container">
       <!-- ============ HERO (plain HTML form, works without JS) ============ -->
       <header class="hero">
-        <h1>Shorten your <span class="grad">long links</span> ✂️</h1>
-        <p class="hero-sub">Paste any long URL below, get a clean short link — click tracking included.</p>
+        <h1>Shorten your <span class="grad">long links</span></h1>
+        <p class="hero-sub">Paste any long URL below, get a clean short link - click tracking included.</p>
 
         <form class="shorten-form" method="POST" action="/url" autocomplete="off">
           <input type="text" name="url" placeholder="https://example.com/my-really-long-url" required />
-          <button type="submit">Shorten ⚡</button>
+          <button type="submit">Shorten</button>
         </form>
       </header>
 
@@ -59,7 +59,7 @@
     </main>
 
     <footer class="footer">
-      Crafted with ❤️ by Ranjay
+      Crafted with care by Ranjay
     </footer>
 
     <!-- ====== page data for React (JSON island, XSS-safe) ====== -->
