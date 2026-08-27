@@ -1,101 +1,93 @@
-# SnapURL — URL Shortener (MERN)
+# SnapURL - My URL Shortener Project
 
-https://url-shortener-frontend-eva1.onrender.com/signup
+Live site: https://url-shortener-frontend-eva1.onrender.com/signup
 
-A full-stack URL Shortener built with the MERN stack following the MVC architecture.
-Users register and log in with JWT cookie authentication, shorten any long URL,
-and track the clicks each of their short links receives — everyone sees only
-their **own** links.
+Hey! This is my first full-stack project. It's a URL shortener made with MERN stack.
+You can signup/login, make short links from long ones, and check how many people clicked them.
+Each user can only see their own links, don't worry.
 
-## Tech
+---
 
-- **Backend** (`backend/`): Node.js, Express 5 JSON API, MongoDB Atlas (Mongoose), JWT cookies, bcryptjs, CORS
-- **Frontend** (`frontend/`): React 18 + Vite SPA (React Router), dark themed UI
-- **DB:** MongoDB Atlas — connection string stored in `backend/.env`
+## What I used
 
-## Project structure
+Backend: Node.js with Express 5, MongoDB (mongoose), JWT for auth in cookies, bcrypt for passwords
+Frontend: React 18 + Vite, React Router, dark theme UI
+Database: MongoDB Atlas. I put the connection string in backend/.env
+
+---
+
+## Folder stuff
 
 ```
 URL_shortener/
-├── backend/          # Express JSON API  ->  npm start
-│   ├── index.js      # app entry, mounts /api/* + /:shortId redirect
-│   ├── controllers/  # url.js, user.js
-│   ├── routes/       # url.js, user.js
-│   ├── middlewares/  # auth (JWT cookie), request logger
-│   ├── models/       # mongoose schemas
-│   ├── service/      # JWT sign/verify
-│   └── .env          # MONGO_URI, PORT=8000, JWT_SECRET, CLIENT_URL
-├── frontend/         # React + Vite SPA    ->  npm run dev
-│   ├── src/pages/    # Home, Login, Signup (+ shared components/styles)
-│   └── .env          # VITE_API_URL=http://localhost:8000
-└── legacy_ejs_app/   # old EJS monolith (kept for reference)
+├── backend/          Express API runs here
+│   ├── index.js      starts the app, has routes + redirect
+│   ├── controllers/  url.js and user.js
+│   ├── routes/       url.js and user.js
+│   ├── middlewares/  auth checker, request logger
+│   ├── models/       mongoose schemas
+│   ├── service/      JWT functions
+│   └── .env          MONGO_URI, PORT, JWT_SECRET, CLIENT_URL
+├── frontend/         React SPA
+│   ├── src/pages/    Home, Login, Signup etc
+│   └── .env          VITE_API_URL
+└── legacy_ejs_app/   old version I made first, kept just in case
 ```
 
-## Setup
+---
 
-1. Install dependencies for both apps (from the project root):
+## How to run it locally
 
+1. First install everything. Go to project root and type:
    ```
    npm run install-all
    ```
 
-2. Configure the two `.env` files:
+2. Make two .env files:
 
-   **`backend/.env`**
+   **backend/.env**
    ```
-   MONGO_URI=mongodb+srv://<user>:<pass>@cluster0.fnb8834.mongodb.net/urlshortner?appName=Cluster0
+   MONGO_URI=mongodb+srv://youruser:yourpass@cluster0.fnb8834.mongodb.net/urlshortner?appName=Cluster0
    PORT=8000
-   JWT_SECRET=your_secret_here
+   JWT_SECRET=put_any_random_string_here
    CLIENT_URL=http://localhost:5173
    ```
 
-   **`frontend/.env`**
+   **frontend/.env**
    ```
    VITE_API_URL=http://localhost:8000
    ```
 
-3. Start the **backend API**:
-
+3. Start backend first:
    ```
    cd backend
-   npm start        # nodemon on http://localhost:8000
+   npm start
    ```
+   It runs on port 8000 with nodemon.
 
-4. In a second terminal, start the **frontend**:
-
+4. Open another terminal for frontend:
    ```
    cd frontend
-   npm run dev      # Vite dev server on http://localhost:5173
+   npm run dev
    ```
+   Runs on port 5173.
 
-5. Open http://localhost:5173 — you'll be redirected to `/signup`.
-   Create an account and start shortening!
+5. Now open http://localhost:5173 in browser. It will take you to signup page.
+   Make an account and start making short links!
 
-> Tip: from the project root you can also run `npm start` (backend) and
-> `npm run dev` (frontend) without cd-ing into the folders.
+Tip: You can also run `npm start` and `npm run dev` from root folder without cd.
 
-## What a normal user can do
+---
 
-- **Create an account & sign in** — friendly signup/login pages, the session
-  is kept in an httpOnly JWT cookie, and logout is one click away
-  (`GET /api/user/logout`)
-- **Shorten any long URL** — paste a link into the box on the home page and
-  get a clean short link instantly (`POST /api/url`)
-- **One-click copy** — every short link has a Copy button right next to it
-- **Share & track clicks** — anyone who opens your short link (`/:shortId`)
-  is redirected to the destination while the click is recorded with a timestamp
-- **Your links, only yours** — the "Your Links" table lists just the links YOU
-  created, each with its click count and creation date; you can never see or
-  touch another user's links
-- **Full-page analytics per link** — clicking Analytics opens a dedicated
-  page with **Total Clicks**, the short link itself, and the complete
-  **Visit History** (the time of every single click), plus an easy
-  **Back to my links** button
-- **Stats at a glance** — home-page cards show your total links, total clicks
-  and average clicks per link
-- **Secure by default** — passwords are hashed with bcrypt and every data
-  request is scoped strictly to your account
+## Features
 
+- Signup / Login pages. Uses JWT in httpOnly cookie so it's secure. Logout with one click.
+- Paste any long URL, get a short one instantly
+- Copy button next to each short link (so you don't have to select manually)
+- When someone clicks your short link, they get redirected and a click is saved with time
+- You can only see YOUR links in the table, with clicks count and date
+- Click "Analytics" on any link to see full visit history with timestamps
+- Home page shows cards: total links, total clicks, avg clicks per link
+- Passwords are hashed with bcrypt so even if db leaks they are safe
 
-
-Crafted with care by Ranjay
+Made by Ranjay (learning MERN!)
