@@ -309,7 +309,7 @@ tbody tr:hover td { background: #f9fafb; }
 }
 .stat-card.clickable.open { border-color: var(--green); }
 
-/* panel revealed by clicking the 🌐 Unique IPs card */
+/* panel revealed by clicking the Unique IPs card */
 .uniq-ip-panel { margin: -8px 0 22px; }
 .uniq-ip-panel .table-head-row h2 { font-size: 17px; }
 

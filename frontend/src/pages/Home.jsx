@@ -88,7 +88,7 @@ export default function Home({ user, onLogout }) {
       <main className="container">
         <header className="hero">
           <h1>
-            Shorten your <span className="grad">long links</span> ✂️
+            Shorten your <span className="grad">long links</span>
           </h1>
           <p className="hero-sub">
             Paste any long URL below, get a clean short link — click tracking included.
@@ -103,20 +103,20 @@ export default function Home({ user, onLogout }) {
               required
             />
             <button type="submit" disabled={creating}>
-              {creating ? "Shortening…" : "Shorten ⚡"}
+              {creating ? "Shortening..." : "Shorten"}
             </button>
           </form>
-          {formError && <div className="alert-error">⚠️ {formError}</div>}
+          {formError && <div className="alert-error">{formError}</div>}
         </header>
 
         <SuccessBanner shortId={newId} />
         <StatsGrid urls={urls} />
 
-        {/* ---- 👑 ADMIN DASHBOARD: every link made by every user + IP ---- */}
+        {/* ---- ADMIN DASHBOARD: every link made by every user + IP ---- */}
         {user.isAdmin && (
           <section className="table-card admin-card">
             <div className="table-head-row">
-              <h2>👑 Admin Dashboard — All Users' Links</h2>
+              <h2>Admin Dashboard - All Users' Links</h2>
               <div className="head-actions">
                 <span className="badge">{allUrls.length} total</span>
                 <button
@@ -124,7 +124,7 @@ export default function Home({ user, onLogout }) {
                   type="button"
                   onClick={loadAllUrls}
                 >
-                  🔄 Refresh
+                  Refresh
                 </button>
               </div>
             </div>
@@ -182,14 +182,14 @@ export default function Home({ user, onLogout }) {
                         </td>
                         <td>
                           <span className="ip-pill" title={u.redirectURL}>
-                            🌐 {u.creatorIp || "—"}
+                            {u.creatorIp || "—"}
                           </span>{" "}
                           {u.creatorMac && (
                             <span
                               className="ip-pill mac"
                               title="Creator device id (MAC-style)"
                             >
-                              🖥 {u.creatorMac}
+                              {u.creatorMac}
                             </span>
                           )}
                         </td>
@@ -203,7 +203,7 @@ export default function Home({ user, onLogout }) {
                 </table>
               </div>
             ) : (
-              <p className="loading">📭 No links created yet by any user.</p>
+              <p className="loading">No links created yet by any user.</p>
             )}
           </section>
         )}

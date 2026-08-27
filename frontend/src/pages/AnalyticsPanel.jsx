@@ -43,17 +43,17 @@ export function AnalyticsPanel({ shortId, onClose }) {
     <section className="analytics-panel">
       <div className="analytics-head">
         <h3>
-          📊 Analytics — <span>{shortId}</span>
+          Analytics — <span>{shortId}</span>
         </h3>
         <button className="btn-close-panel" type="button" onClick={onClose} title="Close">
-          ✕
+          X
         </button>
       </div>
 
-      {loading && <div className="loading">⏳ Loading analytics…</div>}
+      {loading && <div className="loading">Loading analytics...</div>}
 
       {error && (
-        <div className="load-error">⚠️ Could not load analytics. Please try again.</div>
+        <div className="load-error">Could not load analytics. Please try again.</div>
       )}
 
       {!loading && !error && data && (
@@ -71,7 +71,7 @@ export function AnalyticsPanel({ shortId, onClose }) {
                 {recent.map((v, i) => (
                   <li key={v._id || i}>
                     <span className="visit-idx">#{visits.length - i}</span>
-                    <span className="visit-time">🕒 {formatDate(v.timestamp)}</span>
+                    <span className="visit-time">{formatDate(v.timestamp)}</span>
                   </li>
                 ))}
               </ul>
@@ -80,7 +80,7 @@ export function AnalyticsPanel({ shortId, onClose }) {
               )}
             </>
           ) : (
-            <div className="loading">🙈 No clicks yet — share your link!</div>
+            <div className="loading">No clicks yet - share your link!</div>
           )}
         </div>
       )}

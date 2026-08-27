@@ -4,7 +4,7 @@ import { api, SHORT_LINK_BASE, formatDate, formatTime } from "../api.js";
 import { CopyButton, EmptyState, Footer, Navbar } from "../components.jsx";
 
 /* ---------------- Full-page analytics (opens when a normal user
-   clicks 📊 Analytics in "Your Links") ---------------- */
+   clicks Analytics in "Your Links") ---------------- */
 export default function AnalyticsPage({ user, onLogout }) {
   const { shortId } = useParams();
   const navigate = useNavigate();
@@ -92,7 +92,7 @@ export default function AnalyticsPage({ user, onLogout }) {
       <Navbar user={user} onLogout={onLogout} showLogsLink={user?.isAdmin} />
       <main className="container">
         <div className="head-row">
-          <h1 className="page-title">📊 Analytics</h1>
+          <h1 className="page-title">Analytics</h1>
           {/* actions row: admins may delete from here — normal users only get back */}
           <div className="actions">
             {user?.isAdmin && (
@@ -102,11 +102,11 @@ export default function AnalyticsPage({ user, onLogout }) {
                 onClick={handleDelete}
                 disabled={deleting}
               >
-                {deleting ? "Deleting…" : "🗑 Delete"}
+                {deleting ? "Deleting..." : "Delete"}
               </button>
             )}
             <Link className="btn btn-primary btn-back" to="/">
-              ← Back to my links
+              Back to my links
             </Link>
           </div>
         </div>
@@ -119,24 +119,24 @@ export default function AnalyticsPage({ user, onLogout }) {
           <CopyButton text={fullLink} small />
         </p>
 
-        {loading && <div className="loading">⏳ Loading analytics…</div>}
+        {loading && <div className="loading">Loading analytics...</div>}
 
         {!loading && error && (
-          <EmptyState emoji="⚠️" title="Could not load analytics" text={error} />
+          <EmptyState title="Could not load analytics" text={error} />
         )}
 
         {!loading && !error && data && (
           <>
             <section className="stats-grid">
               <div className="stat-card">
-                <span className="stat-icon">👆</span>
+                <span className="stat-icon"></span>
                 <div>
                   <p className="stat-value">{data.totalClicks}</p>
                   <p className="stat-label">Total Clicks</p>
                 </div>
               </div>
               <div className="stat-card stat-wide">
-                <span className="stat-icon">🔗</span>
+                <span className="stat-icon"></span>
                 <div>
                   <p className="stat-value orig-link" title={fullLink}>
                     /{shortId}
@@ -152,7 +152,7 @@ export default function AnalyticsPage({ user, onLogout }) {
                   onClick={() => setShowIps((v) => !v)}
                   title="Click to list the IP addresses that visited this link"
                 >
-                  <span className="stat-icon">🌐</span>
+                  <span className="stat-icon"></span>
                   <div>
                     <p className="stat-value">{ipRows.length}</p>
                     <p className="stat-label">Unique IPs</p>
@@ -165,7 +165,7 @@ export default function AnalyticsPage({ user, onLogout }) {
             {user?.isAdmin && showIps && (
               <section className="table-card uniq-ip-panel">
                 <div className="table-head-row">
-                  <h2>🌐 IP addresses for /{shortId}</h2>
+                  <h2>IP addresses for /{shortId}</h2>
                   <span className="badge">{ipRows.length} unique</span>
                 </div>
                 {ipRows.length > 0 ? (
@@ -185,7 +185,7 @@ export default function AnalyticsPage({ user, onLogout }) {
                           <tr key={r.ip}>
                             <td>{i + 1}</td>
                             <td>
-                              <span className="ip-pill">🌐 {r.ip}</span>
+                              <span className="ip-pill">{r.ip}</span>
                             </td>
                             <td className="muted">{r.mac || "—"}</td>
                             <td>
@@ -198,7 +198,7 @@ export default function AnalyticsPage({ user, onLogout }) {
                     </table>
                   </div>
                 ) : (
-                  <p className="loading">📭 No clicks recorded yet.</p>
+                  <p className="loading">No clicks recorded yet.</p>
                 )}
               </section>
             )}
@@ -217,12 +217,12 @@ export default function AnalyticsPage({ user, onLogout }) {
                     <li key={v._id || i}>
                       <span className="visit-idx">#{visits.length - i}</span>
                       <span className="visit-time">
-                        🕒 {formatTime(v.timestamp)} ({formatDate(v.timestamp)})
+                        {formatTime(v.timestamp)} ({formatDate(v.timestamp)})
                       </span>
                       {/* visitor IPs are visible to the admin only */}
                       {user?.isAdmin && (
                         <span className="visit-ip" title="Visitor IP address">
-                          🌐 {v.ip || "ip not recorded"}
+                          {v.ip || "ip not recorded"}
                         </span>
                       )}
                       {user?.isAdmin && v.mac && (
@@ -230,21 +230,21 @@ export default function AnalyticsPage({ user, onLogout }) {
                           className="visit-mac"
                           title="Visitor device id (MAC-style)"
                         >
-                          🖥 {v.mac}
+                          {v.mac}
                         </span>
                       )}
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="loading">🙈 No clicks yet — share your link!</p>
+                <p className="loading">No clicks yet - share your link!</p>
               )}
             </section>
           </>
         )}
 
         {deleteError && (
-          <div className="alert-error">⚠️ {deleteError}</div>
+          <div className="alert-error">{deleteError}</div>
         )}
       </main>
       <Footer />

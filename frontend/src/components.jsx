@@ -24,7 +24,7 @@ export function CopyButton({ text, small }) {
 
   return (
     <button className={`copy-btn${small ? " small" : ""}`} type="button" onClick={copy}>
-      {copied ? "✅ Copied!" : "📋 Copy"}
+      {copied ? "Copied!" : "Copy"}
     </button>
   );
 }
@@ -35,7 +35,7 @@ export function SuccessBanner({ shortId }) {
   const full = `${SHORT_LINK_BASE}/${shortId}`;
   return (
     <section className="banner-success">
-      <span>✅ Short link created:</span>
+      <span>Short link created:</span>
       <strong>{full}</strong>
       <CopyButton text={full} />
     </section>
@@ -53,9 +53,9 @@ export function StatsGrid({ urls }) {
     totalLinks === 0 ? "0.0" : (totalClicks / totalLinks).toFixed(1);
 
   const cards = [
-    ["🔗", totalLinks, "Total Links"],
-    ["👆", totalClicks, "Total Clicks"],
-    ["📈", avgClicks, "Avg Clicks / Link"],
+    ["", totalLinks, "Total Links"],
+    ["", totalClicks, "Total Clicks"],
+    ["", avgClicks, "Avg Clicks / Link"],
   ];
 
   return (
@@ -74,11 +74,10 @@ export function StatsGrid({ urls }) {
 }
 
 /* ---------------- Empty state ---------------- */
-export function EmptyState({ emoji = "🚀", title, text }) {
+export function EmptyState({ title, text }) {
   return (
     <section className="table-card">
       <div className="empty-state">
-        <div className="empty-emoji">{emoji}</div>
         <h3>{title}</h3>
         <p>{text}</p>
       </div>
@@ -91,7 +90,7 @@ export function Navbar({ user, onLogout, showLogsLink }) {
   return (
     <nav className="navbar">
       <Link className="brand" to="/">
-        ✂️URL Shortener 🔗
+        URL Shortener
       </Link>
 
       <div className="nav-right">
@@ -103,7 +102,7 @@ export function Navbar({ user, onLogout, showLogsLink }) {
             </div>
             {showLogsLink && (
               <Link to="/logs" className="btn-logout btn-logs">
-                📜 Logs
+                Logs
               </Link>
             )}
             <button className="btn-logout" type="button" onClick={onLogout}>
@@ -117,6 +116,6 @@ export function Navbar({ user, onLogout, showLogsLink }) {
 }
 
 /* ---------------- Page footer ---------------- */
-export function Footer({ text = "Crafted with ❤️ by Ranjay" }) {
+export function Footer({ text = "Crafted with care by Ranjay" }) {
   return <footer className="footer">{text}</footer>;
 }

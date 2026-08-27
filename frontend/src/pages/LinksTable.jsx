@@ -65,7 +65,7 @@ export function LinksTable({ urls, onAnalytics, onDelete }) {
                       type="button"
                       onClick={() => onAnalytics(url.shortId)}
                     >
-                      📊 Analytics
+                      Analytics
                     </button>
                     {onDelete && (
                       <button
@@ -74,7 +74,7 @@ export function LinksTable({ urls, onAnalytics, onDelete }) {
                         title={`Delete /${url.shortId}`}
                         onClick={() => onDelete(url.shortId)}
                       >
-                        🗑 Delete
+                        Delete
                       </button>
                     )}
                   </div>

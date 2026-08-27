@@ -37,9 +37,9 @@ function LogsStats({ lines }) {
   })();
 
   const cards = [
-    ["📋", lines.length, "Logged Requests", null],
-    ["🌐", uniqIps, "Unique IPs", () => setShowIps((v) => !v)],
-    ["📅", todays, "Requests Today", null],
+    ["", lines.length, "Logged Requests", null],
+    ["", uniqIps, "Unique IPs", () => setShowIps((v) => !v)],
+    ["", todays, "Requests Today", null],
   ];
 
   return (
@@ -63,12 +63,12 @@ function LogsStats({ lines }) {
         ))}
       </section>
 
-      {/* click the 🌐 Unique IPs card -> drill into the actual addresses */}
+      {/* click the Unique IPs card -> drill into the actual addresses */}
       {showIps &&
         (ipRows.length > 0 ? (
           <section className="table-card uniq-ip-panel">
             <div className="table-head-row">
-              <h2>🌐 Unique IP Addresses</h2>
+              <h2>Unique IP Addresses</h2>
               <span className="badge">{ipRows.length} unique</span>
             </div>
             <div className="table-wrap">
@@ -87,7 +87,7 @@ function LogsStats({ lines }) {
                     <tr key={r.ip}>
                       <td>{i + 1}</td>
                       <td>
-                        <span className="ip-pill">🌐 {r.ip}</span>
+                        <span className="ip-pill">{r.ip}</span>
                       </td>
                       <td className="muted">{r.mac || "—"}</td>
                       <td>
@@ -101,7 +101,7 @@ function LogsStats({ lines }) {
             </div>
           </section>
         ) : (
-          <p className="loading">📭 No IP addresses recorded yet.</p>
+          <p className="loading">No IP addresses recorded yet.</p>
         ))}
     </>
   );
@@ -137,7 +137,7 @@ function NotifList({ notifs }) {
   return (
     <section className="log-card notif-card">
       <div className="log-head">
-        <span>🔔 Link Creation Alerts</span>
+        <span>Link Creation Alerts</span>
         <span className="hint">
           normal users · newest first · showing {shown.length} of {notifs.length}
         </span>
@@ -147,11 +147,11 @@ function NotifList({ notifs }) {
           <li key={n._id} className={`notif-item${n.read ? "" : " unread"}`}>
             <div className="notif-main">
               <span className="notif-user">
-                👤 {n.userName || "Unknown"}{" "}
+                {n.userName || "Unknown"}{" "}
                 <span className="notif-email">({n.userEmail})</span>
               </span>{" "}
               created short link{" "}
-              <strong className="notif-short">/{n.shortId}</strong> →{" "}
+              <strong className="notif-short">/{n.shortId}</strong> -{" "}
               <a
                 className="orig-link"
                 href={n.redirectURL}
@@ -160,14 +160,14 @@ function NotifList({ notifs }) {
                 title={n.redirectURL}
               >
                 {n.redirectURL.length > 50
-                  ? n.redirectURL.slice(0, 50) + "…"
+                  ? n.redirectURL.slice(0, 50) + "..."
                   : n.redirectURL}
               </a>
             </div>
             <div className="notif-meta">
-              <span title={n.userAgent}>🌐 IP: {n.ip || "unknown"}</span>
-              <span>🖥 MAC: {n.mac || "unknown"}</span>
-              <span>🕒 {new Date(n.createdAt).toLocaleString()}</span>
+              <span title={n.userAgent}>IP: {n.ip || "unknown"}</span>
+              <span>MAC: {n.mac || "unknown"}</span>
+              <span>{new Date(n.createdAt).toLocaleString()}</span>
             </div>
           </li>
         ))}
@@ -236,16 +236,16 @@ export default function Logs({ user, onLogout }) {
       <Navbar user={user} onLogout={onLogout} showLogsLink={false} />
       <main className="container">
         <div className="head-row">
-          <h1 className="page-title">📜 Server Logs</h1>
+          <h1 className="page-title">Server Logs</h1>
           <div className="actions">
             <button className="btn btn-ghost" type="button" onClick={loadLogs}>
-              🔄 Refresh
+              Refresh
             </button>
             <a className="btn btn-primary" href={`${API_BASE}/api/logs/download`} download>
-              📥 Download Logs
+              Download Logs
             </a>
             <button className="btn btn-danger" type="button" onClick={clearLogs}>
-              🗑 Clear
+              Clear
             </button>
           </div>
         </div>
@@ -254,13 +254,13 @@ export default function Logs({ user, onLogout }) {
 
         {/* ---- alerts raised whenever a NORMAL user creates a short link ---- */}
         <div className="head-row notif-head-row">
-          <h2 className="section-title">🔔 Link Creation Alerts</h2>
+          <h2 className="section-title">Link Creation Alerts</h2>
           <div className="actions">
             <button className="btn btn-ghost" type="button" onClick={markNotifsRead}>
-              ✅ Mark all read
+              Mark all read
             </button>
             <button className="btn btn-danger" type="button" onClick={clearNotifs}>
-              🗑 Clear Alerts
+              Clear Alerts
             </button>
           </div>
         </div>
@@ -270,7 +270,6 @@ export default function Logs({ user, onLogout }) {
             <NotifList notifs={notifs} />
           ) : (
             <EmptyState
-              emoji="🔔"
               title="No alerts yet"
               text="When a normal user creates a short link, their name, email and IP address will appear here."
             />
@@ -278,21 +277,20 @@ export default function Logs({ user, onLogout }) {
 
         <LogsStats lines={lines} />
 
-        {loading && <div className="loading">⏳ Loading logs…</div>}
+        {loading && <div className="loading">Loading logs...</div>}
 
         {!loading &&
           (lines.length > 0 ? (
             <LogList lines={lines} />
           ) : (
             <EmptyState
-              emoji="📭"
               title="No logs yet"
               text="Browse the site and requests will start appearing here instantly."
             />
           ))}
 
         <p className="back-home">
-          <Link to="/">← Back to my links</Link>
+          <Link to="/">Back to my links</Link>
         </p>
       </main>
       <Footer />

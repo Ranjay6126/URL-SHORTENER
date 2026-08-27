@@ -29,11 +29,11 @@ export default function Signup({ onAuth }) {
 
   return (
     <main className="auth-card">
-      <div className="auth-logo">✂️</div>
+      <div className="auth-logo"></div>
       <h1>Create account</h1>
       <p className="auth-sub">Start shortening links in seconds</p>
 
-      {error && <div className="alert-error">⚠️ {error}</div>}
+      {error && <div className="alert-error">{error}</div>}
 
       <form onSubmit={submit}>
         <div className="input-group">
@@ -74,7 +74,7 @@ export default function Signup({ onAuth }) {
         </div>
 
         <button type="submit" disabled={busy}>
-          {busy ? "Creating…" : "Sign Up ⚡"}
+          {busy ? "Creating..." : "Sign Up"}
         </button>
       </form>
 
@@ -82,7 +82,7 @@ export default function Signup({ onAuth }) {
         Already have an account? <Link to="/login">Login</Link>
       </p>
 
-      <p className="footer-text footer-auth">Passwords are securely hashed 🔒</p>
+      <p className="footer-text footer-auth">Passwords are securely hashed</p>
     </main>
   );
 }

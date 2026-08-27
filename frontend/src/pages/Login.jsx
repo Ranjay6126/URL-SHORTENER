@@ -29,11 +29,11 @@ export default function Login({ onAuth }) {
 
   return (
     <main className="auth-card">
-      <div className="auth-logo">🔗</div>
+      <div className="auth-logo"></div>
       <h1>Welcome back</h1>
       <p className="auth-sub">Login to manage your short links</p>
 
-      {error && <div className="alert-error">⚠️ {error}</div>}
+      {error && <div className="alert-error">{error}</div>}
 
       <form onSubmit={submit}>
         <div className="input-group">
@@ -61,7 +61,7 @@ export default function Login({ onAuth }) {
         </div>
 
         <button type="submit" disabled={busy}>
-          {busy ? "Signing in…" : "Sign In →"}
+          {busy ? "Signing in..." : "Sign In"}
         </button>
       </form>
 

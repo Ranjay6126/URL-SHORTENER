@@ -35,7 +35,7 @@ export default function App() {
   };
 
   if (loading) {
-    return <div className="boot-loading">⏳ Loading SnapURL…</div>;
+    return <div className="boot-loading">Loading SnapURL...</div>;
   }
 
   return (
@@ -69,7 +69,7 @@ export default function App() {
           )
         }
       />
-      {/* full-page analytics — opens when a user clicks 📊 Analytics */}
+      {/* full-page analytics — opens when a user clicks Analytics */}
       <Route
         path="/analytics/:shortId"
         element={
@@ -97,5 +97,5 @@ function ShortJump() {
       }
     });
   }, [id]);
-  return <div className="boot-loading">🔗 Redirecting…</div>;
+  return <div className="boot-loading">Redirecting...</div>;
 }
