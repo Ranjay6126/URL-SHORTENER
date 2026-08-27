@@ -1,12 +1,11 @@
 # SnapURL - My URL Shortener Project
 
-Live site: https://url-shortener-frontend-eva1.onrender.com/signup
+Live site: https://url-shortener-frontend-eva1.onrender.com/
 
 Hey! This is my first full-stack project. It's a URL shortener made with MERN stack.
 You can signup/login, make short links from long ones, and check how many people clicked them.
 Each user can only see their own links, don't worry.
 
----
 
 ## What I used
 
@@ -14,27 +13,6 @@ Backend: Node.js with Express 5, MongoDB (mongoose), JWT for auth in cookies, bc
 Frontend: React 18 + Vite, React Router, dark theme UI
 Database: MongoDB Atlas. I put the connection string in backend/.env
 
----
-
-## Folder stuff
-
-```
-URL_shortener/
-├── backend/          Express API runs here
-│   ├── index.js      starts the app, has routes + redirect
-│   ├── controllers/  url.js and user.js
-│   ├── routes/       url.js and user.js
-│   ├── middlewares/  auth checker, request logger
-│   ├── models/       mongoose schemas
-│   ├── service/      JWT functions
-│   └── .env          MONGO_URI, PORT, JWT_SECRET, CLIENT_URL
-├── frontend/         React SPA
-│   ├── src/pages/    Home, Login, Signup etc
-│   └── .env          VITE_API_URL
-└── legacy_ejs_app/   old version I made first, kept just in case
-```
-
----
 
 ## How to run it locally
 
@@ -90,4 +68,4 @@ Tip: You can also run `npm start` and `npm run dev` from root folder without cd.
 - Home page shows cards: total links, total clicks, avg clicks per link
 - Passwords are hashed with bcrypt so even if db leaks they are safe
 
-Made by Ranjay (learning MERN!)
+created by Ranjay
