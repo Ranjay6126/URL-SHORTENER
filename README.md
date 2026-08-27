@@ -2,10 +2,6 @@
 
 https://url-shortener-frontend-eva1.onrender.com/signup
 
-<img width="1915" height="892" alt="image" src="https://github.com/user-attachments/assets/b1cd6951-5779-42dd-9e65-fb574360c128" />
-
-<img width="1892" height="895" alt="image" src="https://github.com/user-attachments/assets/4b546b9f-41bc-408f-b054-cf49635c7e7c" />
-
 A full-stack URL Shortener built with the MERN stack following the MVC architecture.
 Users register and log in with JWT cookie authentication, shorten any long URL,
 and track the clicks each of their short links receives — everyone sees only
